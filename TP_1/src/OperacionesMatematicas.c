@@ -25,9 +25,9 @@ void Multiplicacion(int numero1, int numero2, int* resultado){
 
 }
 
-void Division(int numero1, int numero2, float* resultado){
+void Division(float numero1, float numero2, float* resultado){
 
-	*resultado = (float)numero1 / numero2;
+	*resultado = numero1 / numero2;
 
 }
 

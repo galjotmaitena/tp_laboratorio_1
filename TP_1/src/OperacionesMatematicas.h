@@ -27,7 +27,7 @@ void Resta(int numero1, int numero2, int* resultado);
 /// \param numero1 Es el primer operando, el dividendo, el numero que sera dividido
 /// \param numero2 Es el segundo operando, el divisor, la cantidad en la que sera dividido el primer operando
 /// \param resultado Es la direccion de memoria de la variable asignada en el main para guardar el resultado de la division
-void Division(int numero1, int numero2, float* resultado);
+void Division(float numero1, float numero2, float* resultado);
 
 /// \fn void Multiplicacion(int, int, int*)
 /// \brief Recive dos numeros enteros, los multiplica y devuelve el resultado por parametro

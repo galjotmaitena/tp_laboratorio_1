@@ -59,7 +59,7 @@ int main(void) {
 
 					validacionDivision = ValidacionDivision(segundoOperando);
 
-				Division(primerOperando, segundoOperando, &resultadoDivision);
+				Division((float)primerOperando, (float)segundoOperando, &resultadoDivision);
 
 				Multiplicacion(primerOperando, segundoOperando, &resultadoMultiplicacion);
 
