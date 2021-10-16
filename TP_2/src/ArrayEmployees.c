@@ -70,22 +70,22 @@ int IngresarUnEmpleado(Employee* lista, int tamanio, int* idContador)
 		*idContador = *idContador + 1;
 		if(IngresarCadena(nombre, "\nIngrese nombre del empleado: ", "\nIngreso invalido", 51, 2) == 1)
 		{
-			printf("No se pudo ingresar el nombre");
+			printf("\nNo se pudo ingresar el nombre");
 		}
 
 		if(IngresarCadena(apellido, "\nIngrese apellido del empleado: ", "\nIngreso invalido", 51, 2) == 1)
 		{
-			printf("No se pudo ingresar el apellido");
+			printf("\nNo se pudo ingresar el apellido");
 		}
 
 		if(IngresarFlotante("\nIngrese salario del empleado: ", "\nIngreso invalido", &salario, 2) == 1)
 		{
-			printf("No se pudo ingresar el salario");
+			printf("\nNo se pudo ingresar el salario");
 		}
 
 		if(IngresarEntero("\nIngrese sector del empleado: ", "\nIngreso invalido", &sector, 2) == 1)
 		{
-			printf("No se pudo ingresar el sector");
+			printf("\nNo se pudo ingresar el sector");
 		}
 
 		id = *idContador;
@@ -111,11 +111,10 @@ int findEmployeeById(Employee* list, int len,int id)
 		{
 			if(list[i].id == id)
 			{
-				printf("\n*******************************************************************************"); //X
+				printf("\n*******************************************************************************");
 				MostrarUnEmpleado(list[i]);
 				printf("\n*******************************************************************************");
 
-				//CONFIRMACION ************************************************************************************************
 				retorno = i;
 			}
 		}
@@ -133,6 +132,11 @@ int removeEmployee(Employee* list, int len, int id)
 	retorno = -1;
 
 	index = findEmployeeById(list, len, id);
+
+	if(index == -1)
+    {
+		printf("No se encontro ningun empleado con ese id");
+	}
 
 	if(list != NULL && len > 0)
 	{
@@ -198,46 +202,51 @@ int Modificar(Employee lista[], int tamanio)
 
 	if(lista != NULL && tamanio > 0)
 	{
-			if(printEmployees(lista, tamanio) == -1)
+		if(printEmployees(lista, tamanio) == -1)
+		{
+			printf("No hay ningun empleado ingresado");
+		}
+
+		IngresarEntero("\nIngrese el id del empleado en el que quiere realizar una modificacion: ", "\nIngreso invalido", &id, 2);
+
+		i = findEmployeeById(lista, tamanio, id);
+
+		if(i == -1)
+		{
+			printf("No se encontro ningun empleado con ese id");
+		}
+
+		opcion = Menu("\n1. Modificar NOMBRE.\n2. Modificar APELLIDO.\n3. Modificar SALARIO.\n4. Modificar SECTOR.\n");
+
+		switch(opcion)
+		{
+		case 1:
+			if(ModificarNombre(lista, tamanio, i) == -1)
 			{
-				printf("No hay ningun empleado ingresado");
+				printf("No se pudo modificar el nombre");
 			}
-
-			IngresarEntero("\nIngrese el id del empleado en el que quiere realizar una modificacion: ", "\nIngreso invalido", &id, 2); //X
-
-			i = findEmployeeById(lista, tamanio, id);
-
-			opcion = Menu("\n1. Modificar NOMBRE.\n2. Modificar APELLIDO.\n3. Modificar SALARIO.\n4. Modificar SECTOR.\n");
-
-			switch(opcion)
+			break;
+		case 2:
+			if(ModificarApellido(lista, tamanio, i) == -1)
 			{
-			case 1:
-				if(ModificarNombre(lista, tamanio, i) == -1)
-				{
-					printf("No se pudo modificar el nombre");
-				}
-				break;
-			case 2:
-				if(ModificarApellido(lista, tamanio, i) == -1)
-				{
-					printf("No se pudo modificar el apellido");
-				}
-				break;
-			case 3:
-				if(ModificarSalario(lista, tamanio, i) == -1)
-				{
-					printf("No se pudo modificar el salario");
-				}
-				break;
-			case 4:
-				if(ModificarSector(lista, tamanio, i) == -1)
-				{
-					printf("No se pudo modificar el sector");
-				}
-				break;
+				printf("No se pudo modificar el apellido");
 			}
+			break;
+		case 3:
+			if(ModificarSalario(lista, tamanio, i) == -1)
+			{
+				printf("No se pudo modificar el salario");
+			}
+			break;
+		case 4:
+			if(ModificarSector(lista, tamanio, i) == -1)
+			{
+				printf("No se pudo modificar el sector");
+			}
+			break;
+		}
 
-			retorno = 0;
+		retorno = 0;
 	}
 
 	return retorno;
@@ -382,34 +391,6 @@ int EmpleadosConSueldoMayorAlPromedio(Employee lista[], int tamanio, float sueld
 	return retorno;
 }
 
-int printEmployees(Employee* list, int length)
-{
-	int retorno;
-	int i;
-
-	retorno = -1;
-
-	if(list != NULL && length > 0)
-	{
-		for(i = 0; i < length; i++)
-		{
-			MostrarUnEmpleado(list[i]);
-		}
-
-		retorno = 0;
-	}
-
-	return retorno;
-}
-
-void MostrarUnEmpleado(Employee unEmpleado)
-{
-	if(unEmpleado.isEmpty == FALSE)
-	{
-		printf("\n%-10d %-10s %-10s %.2f %5d\n", unEmpleado.id, unEmpleado.lastName, unEmpleado.name, unEmpleado.salary, unEmpleado.sector);
-	}
-}
-
 int sortEmployees(Employee* list, int len, int order)
 {
 	int retorno;
@@ -458,23 +439,27 @@ int OrdenarPorSectorUp(Employee lista[], int tamanio)
 	{
 		for(j = i + 1; j < tamanio; j++)
 		{
-			if(lista[i].sector > lista[j].sector)
+			if(lista[i].isEmpty == FALSE)
 			{
-				auxiliar = lista[i];
-				lista[i] = lista[j];
-				lista[j] = auxiliar;
-
-				retorno = 0;
-			}
-			else
-			{
-				if(lista[i].sector == lista[j].sector && strcmp(lista[i].lastName, lista[j].lastName) > 0)
+				if(lista[i].sector > lista[j].sector)
 				{
 					auxiliar = lista[i];
 					lista[i] = lista[j];
 					lista[j] = auxiliar;
+
+					retorno = 0;
+				}
+				else
+				{
+					if(lista[i].sector == lista[j].sector && strcmp(lista[i].lastName, lista[j].lastName) > 0)
+					{
+						auxiliar = lista[i];
+						lista[i] = lista[j];
+						lista[j] = auxiliar;
+					}
 				}
 			}
+
 		}
 	}
 
@@ -494,26 +479,58 @@ int OrdenarPorSectorDown(Employee lista[], int tamanio)
 	{
 		for(j = i + 1; j < tamanio; j++)
 		{
-			if(lista[i].sector < lista[j].sector)
+			if(lista[i].isEmpty == FALSE)
 			{
-				auxiliar = lista[i];
-				lista[i] = lista[j];
-				lista[j] = auxiliar;
-
-				retorno = 0;
-			}
-			else
-			{
-				if(lista[i].sector == lista[j].sector && strcmp(lista[i].lastName, lista[j].lastName) < 0)
+				if(lista[i].sector < lista[j].sector)
 				{
 					auxiliar = lista[i];
 					lista[i] = lista[j];
 					lista[j] = auxiliar;
 
+					retorno = 0;
 				}
+				else
+				{
+					if(lista[i].sector == lista[j].sector && strcmp(lista[i].lastName, lista[j].lastName) < 0)
+					{
+						auxiliar = lista[i];
+						lista[i] = lista[j];
+						lista[j] = auxiliar;
+
+					}
+			    }
+
 			}
 		}
 	}
 
 	return retorno;
+}
+
+int printEmployees(Employee* list, int length)
+{
+	int retorno;
+	int i;
+
+	retorno = -1;
+
+	if(list != NULL && length > 0)
+	{
+		for(i = 0; i < length; i++)
+		{
+			MostrarUnEmpleado(list[i]);
+		}
+
+		retorno = 0;
+	}
+
+	return retorno;
+}
+
+void MostrarUnEmpleado(Employee unEmpleado)
+{
+	if(unEmpleado.isEmpty == FALSE)
+	{
+		printf("\n%-10d %-10s %-10s %.2f %5d\n", unEmpleado.id, unEmpleado.lastName, unEmpleado.name, unEmpleado.salary, unEmpleado.sector);
+	}
 }

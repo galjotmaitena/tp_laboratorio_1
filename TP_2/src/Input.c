@@ -181,10 +181,18 @@ int EsNumerico(char cadena[])
 
 	while(cadena[i] != '\0')
 	{
-		if(isdigit(cadena[i])!=0)
+		if(isdigit(cadena[i]) != 0)
 		{
 			retorno = 0;
 			break;
+		}
+		else
+	    {
+			if(cadena[i] != '\0' && cadena[i] != '\n')
+			{
+				retorno = 1;
+				break;
+			}
 		}
 
 		i++;
@@ -203,9 +211,17 @@ int sonSoloLetras(char cadena[])
 
 	while(cadena[i] != '\0')
 	{
-		if(isalpha(cadena[i])!=0)
+		if(isalpha(cadena[i]) != 0)
 		{
 			retorno = 0;
+		}
+		else
+		{
+			if(cadena[i] != '\0' && cadena[i] != '\n')
+			{
+				retorno = 1;
+				break;
+			}
 		}
 		i++;
 	}
