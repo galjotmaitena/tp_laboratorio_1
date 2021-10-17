@@ -11,7 +11,7 @@ Galjot Maitena 1B
 
 #define TRUE 0
 #define FALSE 1
-#define TAM 5
+#define TAM 1000
 
 int main(void) {
 	setbuf(stdout, NULL);
