@@ -1,3 +1,4 @@
+//controlar la lectura del archivo, PATH direccion del archivo, carpeta en la que esta el archivo
 int controller_loadFromText(char* path , LinkedList* pArrayListEmployee);
 int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee);
 int controller_addEmployee(LinkedList* pArrayListEmployee);
@@ -9,3 +10,4 @@ int controller_saveAsText(char* path , LinkedList* pArrayListEmployee);
 int controller_saveAsBinary(char* path , LinkedList* pArrayListEmployee);
 
 
+int controller_getLastId(LinkedList* pArrayListEmployee);
