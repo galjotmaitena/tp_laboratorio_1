@@ -10,4 +10,5 @@ int controller_saveAsText(char* path , LinkedList* pArrayListEmployee);
 int controller_saveAsBinary(char* path , LinkedList* pArrayListEmployee);
 
 
-int controller_getLastId(LinkedList* pArrayListEmployee);
+int controller_getLastId(char* path, int* id);
+int controller_saveLastId(char* path, int id);

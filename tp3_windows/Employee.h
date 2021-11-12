@@ -42,4 +42,6 @@ int employee_CompareByName(void* x, void* y);
 int employee_CompareBySalary(void* x, void* y);
 int employee_CompareByHours(void* x, void* y);
 
+int employee_AscendenteDescendente(char* mensaje);
+
 #endif // employee_H_INCLUDED

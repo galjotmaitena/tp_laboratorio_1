@@ -30,7 +30,7 @@ Employee* employee_newParametros(char* idStr,char* nombreStr,char* horasTrabajad
 		}
 		else
 		{
-			printf("\nERROR.");
+			printf("\nERROR id.");
 		}
 
 		if(sonSoloLetras(nombreStr) == 0)
@@ -428,4 +428,19 @@ int employee_CompareByHours(void* x, void* y)
 	}
 
 	return compara;
+}
+
+int employee_AscendenteDescendente(char* mensaje)
+{
+	int retorno;
+
+	retorno = -1;
+
+	if(mensaje != NULL)
+	{
+		printf(mensaje);
+		scanf("%d", &retorno);
+	}
+
+	return retorno;
 }

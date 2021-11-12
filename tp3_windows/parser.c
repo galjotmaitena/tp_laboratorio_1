@@ -35,12 +35,10 @@ int parser_EmployeeFromText(FILE* pFile , LinkedList* pArrayListEmployee)
 			if(r == 4)
 			{
 				unEmpleado = employee_newParametros(id, nombre, horasTrabajadas, sueldo);
-				printf("\n%d -- %s -- %d -- %d", unEmpleado->id, unEmpleado->nombre, unEmpleado->horasTrabajadas, unEmpleado->sueldo);
 
 				if(unEmpleado != NULL)
 				{
 					retorno = ll_add(pArrayListEmployee, unEmpleado);
-					printf("\n%d", retorno);
 				}
 			}
 			else
