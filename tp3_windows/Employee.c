@@ -39,7 +39,7 @@ Employee* employee_newParametros(char* idStr,char* nombreStr,char* horasTrabajad
 		}
 		else
 		{
-			//printf("\nERROR."); REVISAAAAAAAAAAAAAAAAAAR
+			printf("\nERROR.");
 		}
 
 		if(EsNumerico(horasTrabajadasStr) == 0)
@@ -213,7 +213,7 @@ int employee_ImprimirUnEmpleado(Employee* this)
 		if(employee_getId(this, &id) == 0 && employee_getNombre(this, nombre) == 0 &&
 		   employee_getHorasTrabajadas(this, &horasTrabajadas) == 0 && employee_getSueldo(this, &sueldo) == 0)
 		{
-			printf("\n%d -- %s -- %d -- %d", this->id, this->nombre, this->horasTrabajadas, this->sueldo);
+			printf("\n%-6d %-15s %-10d %-10d", this->id, this->nombre, this->horasTrabajadas, this->sueldo);
 
 			retorno = 0;
 		}
@@ -339,8 +339,6 @@ int employee_GetById(LinkedList* pArrayListEmployee,int id)
 
 			if(employee_getId(auxiliarEmpleado, &auxiliarId) == 0 && id == auxiliarId)
 			{
-				//MOSTRAR AL EMPLEADO
-				//FUNCION CONFIRMAR
 				retorno = i;
 			}
 		}
@@ -356,13 +354,23 @@ int employee_CompareByName(void* x, void* y)
 	int compara;
 	Employee* unEmpleado;
 	Employee* otroEmpleado;
+	char unNombre[128];
+	char otroNombre[128];
 
 	if(x != NULL && y != NULL)
 	{
 		unEmpleado = (Employee*)x;//unboxing de la variable
 		otroEmpleado = (Employee*)y;
 
-		compara = strcmp(unEmpleado->nombre, otroEmpleado->nombre);
+		if(employee_getNombre(unEmpleado, unNombre) == -1 && employee_getNombre(otroEmpleado, otroNombre) == -1)
+		{
+			printf("ERROR en la comparacion");
+		}
+		else
+		{
+			compara = strcmp(unNombre, otroNombre);
+		}
+
 	}
 
 	return compara;
@@ -383,15 +391,23 @@ int employee_CompareBySalary(void* x, void* y)
 		unEmpleado = (Employee*)x;//unboxing de la variable
 		otroEmpleado = (Employee*)y;
 
-		if(employee_getSueldo(unEmpleado, &unSueldo) > employee_getSueldo(otroEmpleado, &otroSueldo))
+		if(employee_getSueldo(unEmpleado, &unSueldo) == -1 && employee_getSueldo(otroEmpleado, &otroSueldo) == -1)
 		{
-			compara = 1;
+			printf("ERROR en la comparacion");
+
 		}
 		else
 		{
-			if(employee_getSueldo(unEmpleado, &unSueldo) < employee_getSueldo(otroEmpleado, &otroSueldo))
+			if(unSueldo > otroSueldo)
 			{
-				compara = -1;
+				compara = 1;
+			}
+			else
+			{
+				if(unSueldo < otroSueldo)
+				{
+					compara = -1;
+				}
 			}
 		}
 	}
@@ -414,15 +430,22 @@ int employee_CompareByHours(void* x, void* y)
 		unEmpleado = (Employee*)x; //unboxing de la variable
 		otroEmpleado = (Employee*)y;
 
-		if(employee_getSueldo(unEmpleado, &unaCantidadDeHoras) > employee_getSueldo(otroEmpleado, &otraCantidadDeHoras))
+		if(employee_getHorasTrabajadas(unEmpleado, &unaCantidadDeHoras) == -1 && employee_getHorasTrabajadas(otroEmpleado, &otraCantidadDeHoras) == -1)
 		{
-			compara = 1;
+			printf("ERROR en la comparacion");
 		}
 		else
 		{
-			if(employee_getSueldo(unEmpleado, &unaCantidadDeHoras) < employee_getSueldo(otroEmpleado, &otraCantidadDeHoras))
+			if(unaCantidadDeHoras > otraCantidadDeHoras)
 			{
-				compara = -1;
+				compara = 1;
+			}
+			else
+			{
+				if(unaCantidadDeHoras < otraCantidadDeHoras)
+				{
+					compara = -1;
+				}
 			}
 		}
 	}

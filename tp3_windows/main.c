@@ -24,6 +24,9 @@ int main()
 	setbuf(stdout, NULL);
 
     int option = 0;
+    int flag;
+
+    flag = 1;
 
 	LinkedList *listaEmpleados = ll_newLinkedList();
 
@@ -43,49 +46,52 @@ int main()
 		switch (option)
 		{
 		case 1:
-			if(controller_loadFromText("data.csv", listaEmpleados) == 1) // RIGHT
-			{
-				printf("\nNo se pudo cargar en texto.");
-			}
+
+
+				if(controller_loadFromText("data.csv", listaEmpleados) == 1) // RIGHT
+				{
+					printf("\nNo se pudo cargar en texto.");
+					flag = 0;
+				}
+
+
 			break;
 		case 2:
-			printf("2");
-			if(controller_loadFromBinary("data.bin", listaEmpleados) == 1)
-			{
-				printf("\nNo se pudo cargar en binario.");
-			}
+
+				if(controller_loadFromBinary("data.bin", listaEmpleados) == 1)
+				{
+					printf("\nNo se pudo cargar en binario.");
+					flag = 0;
+				}
+
+
 			break;
 		case 3:
-			printf("3");
-			if(controller_addEmployee(listaEmpleados) == 1) // RIGHT revisar id!!!!!!!!!!!
+			if(controller_addEmployee(listaEmpleados) == 1)
 			{
 				printf("\nNo se pudo agregar al empleado.");
 			}
 			break;
 		case 4:
-			printf("4");
-			if(controller_editEmployee(listaEmpleados) == 1) // RIGHT
+			if(controller_editEmployee(listaEmpleados) == 1)
 			{
 				printf("\nNo se pudo realizra la modificacion.");
 			}
 			break;
 		case 5:
-			printf("5");
-			if(controller_removeEmployee(listaEmpleados) == 1) // RIGHT
+			if(controller_removeEmployee(listaEmpleados) == 1)
 			{
 				printf("\nNo se pudo dar de baja.");
 			}
 			break;
 		case 6:
-			printf("6");
-			if(controller_ListEmployee(listaEmpleados) == 1) // RIGHT
+			if(controller_ListEmployee(listaEmpleados) == 1)
 			{
 				printf("\nNo se pudo listar.");
 			}
 			break;
 		case 7:
-			printf("7");
-			if(controller_sortEmployee(listaEmpleados) == 1) // RIGHT
+			if(controller_sortEmployee(listaEmpleados) == 1)
 			{
 				printf("\nNo se pudo ordenar.");
 			}
@@ -95,10 +101,8 @@ int main()
 			{
 				printf("\nNo se pudo guardar el archivo en texto.");
 			}
-			printf("8");
 			break;
 		case 9:
-			printf("9");
 			if(controller_saveAsBinary("data.bin", listaEmpleados) == 1)
 			{
 				printf("\nNo se pudo guardar el archivo en binario.");

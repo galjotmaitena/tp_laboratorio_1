@@ -234,7 +234,6 @@ int EsNumerico(char cadena[])
 		if(isdigit(cadena[i]) != 0)
 		{
 			retorno = 0;
-			break;
 		}
 		else
 	    {
@@ -261,7 +260,7 @@ int sonSoloLetras(char cadena[])
 
 	while(cadena[i] != '\0')
 	{
-		if(isalpha(cadena[i]) != 0)
+		if(isalpha(cadena[i]) != 0 || isspace(cadena[i]) != 0 || '-')
 		{
 			retorno = 0;
 		}
