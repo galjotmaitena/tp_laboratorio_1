@@ -379,8 +379,8 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
 			case 1:
 				if(ll_sort(pListaOrdenada, employee_CompareByName, ordenamiento) == 0)
 				{
-					printf("\nLista ordenada.");
 					controller_ListEmployee(pListaOrdenada);
+					printf("\nLista ordenada.");
 				}
 				else
 				{
@@ -390,8 +390,8 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
 			case 2:
 				if(ll_sort(pListaOrdenada, employee_CompareByHours, ordenamiento) == 0)
 				{
-					printf("\nLista ordenada.");
 					controller_ListEmployee(pListaOrdenada);
+					printf("\nLista ordenada.");
 				}
 				else
 				{
@@ -401,8 +401,8 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
 			case 3:
 				if(ll_sort(pListaOrdenada, employee_CompareBySalary, ordenamiento) == 0)
 				{
-					printf("\nLista ordenada.");
 					controller_ListEmployee(pListaOrdenada);
+					printf("\nLista ordenada.");
 				}
 				else
 				{
@@ -416,6 +416,8 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
 				printf("\nOpcion invalida");
 				break;
 			}
+
+			retorno = 0;
 		}
 
 	}
@@ -447,7 +449,7 @@ int controller_saveAsText(char* path , LinkedList* pArrayListEmployee)
 		{
 			if(parser_SaveAsText(miArchivo, pArrayListEmployee) == 0)
 			{
-				if(parser_SaveAsBinary(miArchivo, pArrayListEmployee) == 0)
+				if(controller_saveAsBinary("data.bin", pArrayListEmployee) == 0)
 				{
 					printf("\nSe guardaron los datos exitosamente.");
 
@@ -486,7 +488,7 @@ int controller_saveAsBinary(char* path , LinkedList* pArrayListEmployee)
 		{
 			if(parser_SaveAsBinary(miArchivo, pArrayListEmployee) == 0)
 			{
-				if(parser_SaveAsText(miArchivo, pArrayListEmployee) == 0)
+				if(controller_saveAsText("data.csv", pArrayListEmployee) == 0)
 				{
 					printf("\nSe guardaron los datos exitosamente.");
 

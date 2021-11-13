@@ -6,6 +6,8 @@
 #include "Input.h"
 
 /****************************************************
+ Galjot Maitena divB
+
     Menu:
      1. Cargar los datos de los empleados desde el archivo data.csv (modo texto).
      2. Cargar los datos de los empleados desde el archivo data.csv (modo binario).
