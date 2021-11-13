@@ -48,24 +48,33 @@ int main()
 		switch (option)
 		{
 		case 1:
-
-
-				if(controller_loadFromText("data.csv", listaEmpleados) == 1) // RIGHT
+			if(flag == 1)
+			{
+				if(controller_loadFromText("data.csv", listaEmpleados) == 1)
 				{
 					printf("\nNo se pudo cargar en texto.");
 					flag = 0;
 				}
-
+			}
+			else
+			{
+				printf("\nEl archivo ya fue cargado en modo binario");
+			}
 
 			break;
 		case 2:
-
+			if(flag == 1)
+			{
 				if(controller_loadFromBinary("data.bin", listaEmpleados) == 1)
 				{
 					printf("\nNo se pudo cargar en binario.");
 					flag = 0;
 				}
-
+			}
+			else
+			{
+				printf("\nEl archivo ya fue cargado en modo binario");
+			}
 
 			break;
 		case 3:
@@ -73,42 +82,49 @@ int main()
 			{
 				printf("\nNo se pudo agregar al empleado.");
 			}
+
 			break;
 		case 4:
 			if(controller_editEmployee(listaEmpleados) == 1)
 			{
 				printf("\nNo se pudo realizra la modificacion.");
 			}
+
 			break;
 		case 5:
 			if(controller_removeEmployee(listaEmpleados) == 1)
 			{
 				printf("\nNo se pudo dar de baja.");
 			}
+
 			break;
 		case 6:
 			if(controller_ListEmployee(listaEmpleados) == 1)
 			{
 				printf("\nNo se pudo listar.");
 			}
+
 			break;
 		case 7:
 			if(controller_sortEmployee(listaEmpleados) == 1)
 			{
 				printf("\nNo se pudo ordenar.");
 			}
+
 			break;
 		case 8:
 			if(controller_saveAsText("data.csv", listaEmpleados) == 1)
 			{
 				printf("\nNo se pudo guardar el archivo en texto.");
 			}
+
 			break;
 		case 9:
 			if(controller_saveAsBinary("data.bin", listaEmpleados) == 1)
 			{
 				printf("\nNo se pudo guardar el archivo en binario.");
 			}
+
 			break;
 		case 10:
 			printf("\nSALIR");

@@ -10,7 +10,7 @@ Employee* employee_new()
 
 	if(pEmpleado == NULL)
 	{
-		exit(EXIT_FAILURE);
+		exit(EXIT_FAILURE) ;
 	}
 
 	return pEmpleado;
